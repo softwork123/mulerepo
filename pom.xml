@@ -16,16 +16,39 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <app.runtime>4.3.0</app.runtime>
-    <mule.maven.plugin.version>3.5.1</mule.maven.plugin.version>
+    <mule.maven.plugin.version>3.8.7</mule.maven.plugin.version>
     <munit.version>2.3.4</munit.version>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Force Aether dependency versions -->
+      <dependency>
+        <groupId>org.eclipse.aether</groupId>
+        <artifactId>aether-connector-basic</artifactId>
+        <version>1.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.aether</groupId>
+        <artifactId>aether-transport-file</artifactId>
+        <version>1.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.aether</groupId>
+        <artifactId>aether-transport-http</artifactId>
+        <version>1.1.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.2.0</version>
       </plugin>
 
       <plugin>
@@ -47,6 +70,24 @@
             <workers>1</workers>
           </cloudHubDeployment>
         </configuration>
+        <dependencies>
+          <!-- Explicit plugin dependencies to resolve missing classes -->
+          <dependency>
+            <groupId>org.eclipse.aether</groupId>
+            <artifactId>aether-connector-basic</artifactId>
+            <version>1.1.0</version>
+          </dependency>
+          <dependency>
+            <groupId>org.eclipse.aether</groupId>
+            <artifactId>aether-transport-http</artifactId>
+            <version>1.1.0</version>
+          </dependency>
+          <dependency>
+            <groupId>org.eclipse.aether</groupId>
+            <artifactId>aether-transport-file</artifactId>
+            <version>1.1.0</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>deploy</id>
@@ -120,23 +161,6 @@
       <version>1.0.2</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- Fix for Aether missing class error -->
-    <dependency>
-      <groupId>org.eclipse.aether</groupId>
-      <artifactId>aether-connector-basic</artifactId>
-      <version>1.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.aether</groupId>
-      <artifactId>aether-transport-file</artifactId>
-      <version>1.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.aether</groupId>
-      <artifactId>aether-transport-http</artifactId>
-      <version>1.1.0</version>
-    </dependency>
   </dependencies>
 
   <repositories>
@@ -167,4 +191,3 @@
   </pluginRepositories>
 
 </project>
-
