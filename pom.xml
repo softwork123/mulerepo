@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.mycompany</groupId>
   <artifactId>muledemotest12</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>mule-application</packaging>
+
   <name>mule</name>
 
   <properties>
@@ -37,6 +39,7 @@
             <username>gousesystem</username>
             <password>Aiza@2022!$</password>
             <environment>Sandbox</environment>
+            <!-- <region>eu-central-1</region> -->
             <objectStoreV2>true</objectStoreV2>
             <uri>https://anypoint.mulesoft.com</uri>
             <applicationName>muledemotest12</applicationName>
@@ -82,6 +85,7 @@
   </build>
 
   <dependencies>
+    <!-- Mule connectors -->
     <dependency>
       <groupId>org.mule.connectors</groupId>
       <artifactId>mule-http-connector</artifactId>
@@ -94,6 +98,8 @@
       <version>1.2.1</version>
       <classifier>mule-plugin</classifier>
     </dependency>
+
+    <!-- MUnit for testing -->
     <dependency>
       <groupId>com.mulesoft.munit</groupId>
       <artifactId>munit-runner</artifactId>
@@ -114,9 +120,21 @@
       <version>1.0.2</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- Fix for Aether missing class error -->
     <dependency>
       <groupId>org.eclipse.aether</groupId>
       <artifactId>aether-connector-basic</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-transport-file</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-transport-http</artifactId>
       <version>1.1.0</version>
     </dependency>
   </dependencies>
